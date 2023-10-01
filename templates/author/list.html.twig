@@ -1,0 +1,20 @@
+{# templates/author/list.html.twig #}
+{% if authors is defined and authors|length > 0 %}
+    <ul>
+        {% for author in authors %}
+            <li>
+                <a href="{{ path('author_details', {'id': author.id}) }}">details</a>
+                {{ author.username|upper }}
+            </li>
+        {% endfor %}
+    </ul>
+    <p>Number of authors: {{ authors|length }}</p>
+    {# Calculating the total number of books #}
+    {% set totalBooks = 0 %}
+    {% for author in authors %}
+        {% set totalBooks = totalBooks + author.nb_books %}
+    {% endfor %}
+    <p>Total number of books by all authors: {{ totalBooks }}</p>
+{% else %}
+    <p>No authors found.</p>
+{% endif %}
